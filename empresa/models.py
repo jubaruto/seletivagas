@@ -10,7 +10,7 @@ class Empresa(models.Model):
         ('FN', 'Fonoaudiologia'),
         ('EM', 'Engenharia Mecânica'),
         ('EP', 'Engenharia de Produção'),
-        ('DS', 'Desenvolvedor de Software')
+        ('DS', 'Desenvolvedor de Software'),
         ('MT', 'Motorista'),
         ('AS', 'Assitente Social'),
         ('FM', 'Farmácia'),
@@ -21,6 +21,6 @@ class Empresa(models.Model):
     cidade = models.CharField(max_length=30)
     endereço = models.CharField(max_length=30)
     carac_empresa = models.TextField()
-    nicho_mercado = models.CharField(max_length=3, choices=choices_nicho_mercado)
+    nicho_mercado = models.CharField(max_length=5, choices=choices_nicho_mercado)
     
     
