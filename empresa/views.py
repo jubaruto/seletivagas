@@ -3,6 +3,7 @@ from django.http import HttpResponse
 
 
 def nova_empresa(request):
-    return HttpResponse('Estou em uma nova empresa')
+    return render(request, 'nova_empresa.html')
+
 
     
