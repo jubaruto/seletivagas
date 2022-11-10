@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Tecnologias, Empresa
-from django.shortcuts import redirect
+from django.shortcuts import redirect, get_object_or_404
 from django.contrib import messages
 from django.contrib.messages import constants
 
@@ -13,7 +13,7 @@ def nova_empresa(request):
         nome = request.POST.get('nome')
         email = request.POST.get('email')
         cidade = request.POST.get('cidade')
-        endereço = request.POST.get('endereço')
+        endereco = request.POST.get('endereco')
         nicho = request.POST.get('nicho')
         caracteristicas = request.POST.get('caracteristicas')
         tecnologias = request.POST.getlist('tecnologias')
@@ -45,8 +45,18 @@ def nova_empresa(request):
         return redirect('/home/empresas')
     
 def empresas(request):
+    filtrar_tecnologias = request.GET.get('tecnologias')
+    filtrar_nome = request.GET.get('nome')
     empresas = Empresa.objects.all()
-    return render(request, 'empresa.html', {'empresas': empresas})
+    
+    if filtrar_tecnologias:
+        empresas = empresas.filter(tecnologias=filtrar_tecnologias)
+        
+    if filtrar_nome:
+        empresas = empresas.filter(nome__icontains=filtrar_nome)
+    
+    tecnologias = Tecnologias.objects.all()
+    return render(request, 'empresa.html', {'empresas': empresas, 'tecnologias': tecnologias})
 
 def excluir_empresa(request, id):
     empresa = Empresa.objects.get(id=id)
@@ -54,7 +64,9 @@ def excluir_empresa(request, id):
     messages.add_message(request, constants.SUCCESS, 'Empresa excluída com sucesso')
     return redirect('/home/empresas')
     
-    
+def empresa(request, id):
+    empresa_unica = get_object_or_404(Empresa, id=id)
+    return render(request, 'empresa_unica.html', {'empresa': empresa_unica})
 
 
 
