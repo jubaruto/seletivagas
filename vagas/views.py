@@ -47,7 +47,8 @@ def nova_vaga(request):
 def vaga(request, id):
     vaga = get_object_or_404(Vagas, id=id)
     tarefas = Tarefa.objects.filter(vaga=vaga).filter(realizada=False)
-    return render(request, 'vaga.html', {'vaga': vaga, 'tarefas': tarefas})
+    emails = Emails.objects.filter(vaga=vaga)
+    return render(request, 'vaga.html', {'vaga': vaga, 'tarefas': tarefas, 'emails': emails })
     
 
 def nova_tarefa(request, id_vaga):
