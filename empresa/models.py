@@ -26,9 +26,9 @@ class Empresa(models.Model):
     nome = models.CharField(max_length=30)
     email = models.EmailField()
     cidade = models.CharField(max_length=30)
-    endereço = models.CharField(max_length=30)
+    endereco = models.CharField(max_length=30)
     tecnologias = models.ManyToManyField(Tecnologias)
-    carac_empresa = models.TextField()
+    caracteristica_empresa = models.TextField()
     nicho_mercado = models.CharField(max_length=5, choices=choices_nicho_mercado)
     
     def __str__(self):
