@@ -42,7 +42,7 @@ def nova_empresa(request):
         empresa.tecnologias.add(*tecnologias)
         empresa.save()
         messages.add_message(request, constants.SUCCESS, 'Empresa cadastrada com sucesso')
-        return redirect('/home/nova_empresas')
+        return redirect('/home/nova_empresa')
     
 def empresas(request):
     filtrar_tecnologias = request.GET.get('tecnologias')
