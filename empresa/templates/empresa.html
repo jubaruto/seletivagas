@@ -55,8 +55,7 @@
                     </tr>
 
                         {% for empresa in empresas %}
-
-                            <tr {% if not forloop.counter|par %} class="tabela-linha"{% endif %}>
+                            <tr {% if not forloop.counter|is_par %} class="tabela-linha"{% endif %}>
                                 <td><a href="{% url 'empresa_unica' empresa.id %}">{{empresa.nome}}</a></td>
                                 <td>{{empresa.endereco}}</td>
                                 <td>
@@ -69,9 +68,9 @@
                                 </td>
                                 <td>
                                     {% if empresa.qtd_vagas > 0 %}
-                                        <img src="{% static 'empresa/img/flag_green.png' %}"
+                                        <img src="{% static 'empresa/img/flag_green.png' %}">
                                     {% else %}
-                                    <img src="{% static 'empresa/img/flag_red.png' %}"
+                                        <img src="{% static 'empresa/img/flag_red.png' %}">
                                     {% endif %}
                                     {{empresa.qtd_vagas}}
                                 </td>
